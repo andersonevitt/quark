@@ -17,31 +17,32 @@
 package org.evitt.eval;
 
 import org.evitt.EvaluationException;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.InvocationTargetException;
 
 public interface Visitor<T> {
-    T visit(BooleanExpr b);
+    T visit(@NotNull BooleanExpr b);
 
-    T visit(IntExpr i);
+    T visit(@NotNull IntExpr i);
 
-    T visit(FloatExpr f);
+    T visit(@NotNull FloatExpr f);
 
-    T visit(StringExpr s);
+    T visit(@NotNull StringExpr s);
 
-    T visit(Symbol s);
+    T visit(@NotNull Symbol s);
 
-    T visit(Sequence s);
+    T visit(@NotNull Sequence s);
 
-    T visit(Lambda l);
+    T visit(@NotNull Lambda l);
 
-    T visit(Call c);
+    T visit(@NotNull Call c);
 
-    T visit(Builtin bf);
+    T visit(@NotNull Builtin bf);
 
     // Horrific hack to dynamically dispatch calls where the subtype isn't
     // known at compile time
-    default <E extends Expr> T visit(E e) {
+    default <E extends Expr> T visit(@NotNull E e) {
         // TODO: This method could be explosive if another Expr subclass is
         //  added but isn't added to visitor
 
@@ -52,6 +53,7 @@ public interface Visitor<T> {
              then casts the result back to the type that is wanted (unsafely)
             */
             var method = this.getClass().getMethod("visit", e.getClass());
+            //noinspection unchecked
             return (T) method.invoke(this, e);
 
         } catch (NoSuchMethodException | InvocationTargetException |

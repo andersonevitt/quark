@@ -16,49 +16,52 @@
 
 package org.evitt.eval;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 public class BaseVisitor<T> implements Visitor<T> {
     @Override
-    public T visit(BooleanExpr b) {
+    public @Nullable T visit(@NotNull BooleanExpr b) {
         return null;
     }
 
     @Override
-    public T visit(IntExpr i) {
+    public @Nullable T visit(@NotNull IntExpr i) {
         return null;
     }
 
     @Override
-    public T visit(FloatExpr f) {
+    public @Nullable T visit(@NotNull FloatExpr f) {
         return null;
     }
 
     @Override
-    public T visit(StringExpr s) {
+    public @Nullable T visit(@NotNull StringExpr s) {
         return null;
     }
 
     @Override
-    public T visit(Symbol s) {
+    public @Nullable T visit(@NotNull Symbol s) {
         return null;
     }
 
     @Override
-    public T visit(Sequence s) {
+    public @Nullable T visit(@NotNull Sequence s) {
         return null;
     }
 
     @Override
-    public T visit(Lambda l) {
+    public @Nullable T visit(@NotNull Lambda l) {
         return null;
     }
 
     @Override
-    public T visit(Call c) {
+    public @Nullable T visit(@NotNull Call c) {
         return null;
     }
 
     @Override
-    public T visit(Builtin bf) {
+    public @Nullable T visit(@NotNull Builtin bf) {
         return null;
     }
 }

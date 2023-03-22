@@ -17,8 +17,8 @@
 package org.evitt;
 
 import org.evitt.interpreter.ExprLogger;
-import org.evitt.interpreter.Interpreter;
 import org.evitt.interpreter.ExprPrinter;
+import org.evitt.interpreter.Interpreter;
 import org.evitt.lexer.CharacterStream;
 import org.evitt.lexer.Lexer;
 import org.evitt.logging.Logger;

@@ -16,6 +16,8 @@
 
 package org.evitt.eval;
 
+import org.jetbrains.annotations.Nullable;
+
 /**
  * An immutable collection that represents a sequence of values.
  */
@@ -25,14 +27,14 @@ public sealed interface Sequence extends Expr permits ListExpr, Vector {
      *
      * @return the first item in the sequence
      */
-    Expr getFirst();
+    @Nullable Expr getFirst();
 
     /**
      * Returns a sequence with the rest of the values in the sequence
      *
      * @return a sequence of all remaining values in the sequence
      */
-    Sequence getRest();
+    @Nullable Sequence getRest();
 
     /**
      * Gets the nth getValue in the sequence
@@ -40,7 +42,7 @@ public sealed interface Sequence extends Expr permits ListExpr, Vector {
      * @param n the index of the item to return
      * @return nth item
      */
-    Expr nth(int n);
+    @Nullable Expr nth(int n);
 
-    FloatExpr length();
+    @Nullable FloatExpr length();
 }

@@ -18,58 +18,60 @@ package org.evitt.interpreter;
 
 import org.evitt.eval.*;
 import org.evitt.logging.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class ExprLogger implements Visitor<Void> {
     @Override
-    public Void visit(BooleanExpr b) {
+    public @Nullable Void visit(@NotNull BooleanExpr b) {
         Logger.debug("Visited boolean");
         return null;
     }
 
     @Override
-    public Void visit(IntExpr i) {
+    public @Nullable Void visit(@NotNull IntExpr i) {
         Logger.debug("Visited integer");
         return null;
     }
 
     @Override
-    public Void visit(FloatExpr f) {
+    public @Nullable Void visit(@NotNull FloatExpr f) {
         Logger.debug("Visited float");
         return null;
     }
 
     @Override
-    public Void visit(StringExpr s) {
+    public @Nullable Void visit(@NotNull StringExpr s) {
         Logger.debug("Visited string");
         return null;
     }
 
     @Override
-    public Void visit(Symbol s) {
+    public @Nullable Void visit(@NotNull Symbol s) {
         Logger.debug("Visited symbol");
         return null;
     }
 
     @Override
-    public Void visit(Sequence s) {
+    public @Nullable Void visit(@NotNull Sequence s) {
         Logger.debug("Visited sequence");
         return null;
     }
 
     @Override
-    public Void visit(Lambda l) {
+    public @Nullable Void visit(@NotNull Lambda l) {
         Logger.debug("Visited lambda");
         return null;
     }
 
     @Override
-    public Void visit(Call c) {
+    public @Nullable Void visit(@NotNull Call c) {
         Logger.debug("Visited call");
         return null;
     }
 
     @Override
-    public Void visit(Builtin bf) {
+    public @Nullable Void visit(@NotNull Builtin bf) {
         Logger.debug("Visited builtin");
         return null;
     }

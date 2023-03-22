@@ -16,11 +16,13 @@
 
 package org.evitt.eval;
 
+import org.jetbrains.annotations.NotNull;
+
 public sealed interface Expr permits BooleanExpr, Builtin, Call,
         FloatExpr, IntExpr, Lambda, Sequence, StringExpr, Symbol {
     Object getValue();
 
-    default <T> T accept(Visitor<T> v) {
+    default <T> T accept(@NotNull Visitor<T> v) {
         return v.visit(this);
     }
 }

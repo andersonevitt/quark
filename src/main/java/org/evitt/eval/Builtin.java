@@ -17,6 +17,7 @@
 package org.evitt.eval;
 
 import org.evitt.interpreter.Environment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public non-sealed interface Builtin extends Expr {
     Expr apply(Environment env, List<Expr> arguments);
 
     @Override
-    default Object getValue() {
+    default @NotNull Object getValue() {
         return "Builtin";
     }
 }

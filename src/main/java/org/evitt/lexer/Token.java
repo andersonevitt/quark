@@ -21,17 +21,17 @@ import org.jetbrains.annotations.Nullable;
 
 public record Token(Type type, Object value, Position position) {
 
+    public Token(@NotNull Type type, @NotNull Position position) {
+        this(type, null, position);
+    }
+
     public Token(@NotNull Type type, @Nullable Object value, @NotNull Position position) {
         this.type = type;
         this.value = value;
         this.position = new Position(position);
     }
 
-    public Token(Type type, Position position) {
-        this(type, null, position);
-    }
-
-    static @NotNull Token getSymbolOrNumber(@NotNull String matched, Position p) {
+    static @NotNull Token getSymbolOrNumber(@NotNull String matched, @NotNull Position p) {
         try {
             return new Token(Type.INTEGER, Integer.parseInt(matched), p);
         } catch (NumberFormatException e1) {
@@ -43,7 +43,7 @@ public record Token(Type type, Object value, Position position) {
         }
     }
 
-    public Object getValue() {
+    public @Nullable Object getValue() {
         return value;
     }
 

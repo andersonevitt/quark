@@ -18,6 +18,7 @@ package org.evitt.util;
 
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -31,6 +32,6 @@ public interface PeekableIterator<E> extends Iterator<E> {
         return new BufferedPeekableIterator<>(value.iterator());
     }
 
-    E peek() throws NoSuchElementException;
+    @Nullable E peek() throws NoSuchElementException;
 }
 

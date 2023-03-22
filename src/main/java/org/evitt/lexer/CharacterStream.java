@@ -62,7 +62,7 @@ public class CharacterStream implements PeekableIterator<Character> {
             reader.reset();
             return true;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            return false;
         }
     }
 
@@ -76,19 +76,19 @@ public class CharacterStream implements PeekableIterator<Character> {
             position.nextColumn();
             return value;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new NoSuchElementException(e);
         }
     }
 
     @Override
-    public @NotNull Character peek() {
+    public @NotNull Character peek() throws NoSuchElementException {
         try {
             reader.mark(1);
             int value = reader.read();
             reader.reset();
             return (char) value;
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new NoSuchElementException(e);
         }
 
 

@@ -17,6 +17,7 @@
 package org.evitt.eval;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -64,22 +65,22 @@ public final class ListExpr implements Sequence {
     }
 
     @Override
-    public Expr getFirst() {
+    public @Nullable Expr getFirst() {
         return null;
     }
 
     @Override
-    public Sequence getRest() {
+    public @Nullable Sequence getRest() {
         return null;
     }
 
     @Override
-    public Expr nth(int n) {
+    public @Nullable Expr nth(int n) {
         return null;
     }
 
     @Override
-    public FloatExpr length() {
+    public @Nullable FloatExpr length() {
         return null;
     }
 }

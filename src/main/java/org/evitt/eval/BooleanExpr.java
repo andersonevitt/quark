@@ -25,7 +25,7 @@ public record BooleanExpr(boolean value) implements Expr {
     }
 
     @Override
-    public Object getValue() {
+    public @NotNull Object getValue() {
         return value;
     }
 }

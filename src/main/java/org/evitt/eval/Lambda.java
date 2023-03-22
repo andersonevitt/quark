@@ -20,23 +20,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public final class Lambda implements Expr {
-    private final List<Symbol> parameters;
-    private final Expr body;
-
-    public Lambda(List<Symbol> parameters, Expr body) {
-        this.parameters = parameters;
-        this.body = body;
-    }
-
-    public List<Symbol> getParameters() {
-        return parameters;
-    }
-
-    public Expr getBody() {
-        return body;
-    }
-
+public record Lambda(List<Symbol> parameters, Expr body) implements Expr {
     public @NotNull String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("(lambda (");

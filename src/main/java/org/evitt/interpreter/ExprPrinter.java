@@ -17,46 +17,47 @@
 package org.evitt.interpreter;
 
 import org.evitt.eval.*;
+import org.jetbrains.annotations.NotNull;
 
 public class ExprPrinter implements Visitor<String> {
 
     @Override
-    public String visit(BooleanExpr b) {
+    public @NotNull String visit(@NotNull BooleanExpr b) {
         return b.toString();
     }
 
     @Override
-    public String visit(IntExpr i) {
+    public @NotNull String visit(@NotNull IntExpr i) {
         return i.toString();
     }
 
     @Override
-    public String visit(FloatExpr f) {
+    public @NotNull String visit(@NotNull FloatExpr f) {
         return f.toString();
     }
 
     @Override
-    public String visit(StringExpr s) {
+    public @NotNull String visit(@NotNull StringExpr s) {
         return s.toString();
     }
 
     @Override
-    public String visit(Symbol s) {
+    public String visit(@NotNull Symbol s) {
         return s.toString();
     }
 
     @Override
-    public String visit(Sequence s) {
+    public String visit(@NotNull Sequence s) {
         return s.toString();
     }
 
     @Override
-    public String visit(Lambda l) {
+    public @NotNull String visit(@NotNull Lambda l) {
         return l.toString();
     }
 
     @Override
-    public String visit(Call c) {
+    public @NotNull String visit(@NotNull Call c) {
         StringBuilder start = new StringBuilder();
         start.append('(').append(c.getName()).append(' ');
 
@@ -73,7 +74,7 @@ public class ExprPrinter implements Visitor<String> {
     }
 
     @Override
-    public String visit(Builtin bf) {
+    public String visit(@NotNull Builtin bf) {
         return bf.toString();
     }
 }

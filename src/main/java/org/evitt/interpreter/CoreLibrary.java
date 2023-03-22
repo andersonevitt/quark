@@ -28,6 +28,8 @@ import java.util.List;
 import static org.evitt.interpreter.BuiltinUtils.*;
 
 public class CoreLibrary {
+    private CoreLibrary() {}
+
     static @NotNull Expr add(Environment env,
                              @NotNull List<Expr> args) {
         require(args.isEmpty(), "Cannot accept zero arguments");
@@ -51,7 +53,7 @@ public class CoreLibrary {
 
     static @NotNull Expr subtract(Environment env,
                                   @NotNull List<Expr> args) {
-        if (args.size() == 0) {
+        if (args.isEmpty()) {
             throw new EvaluationException("Cannot accept zero arguments");
         } else if (args.size() == 1) {
             return new FloatExpr(-(double) args.get(0).getValue());

@@ -29,13 +29,21 @@ public class Position implements Comparable<Position> {
         column = 1;
     }
 
-    public Position(Position other) {
+    public Position(@NotNull Position other) {
         this(other.getLine(), other.getLine());
     }
 
     public Position(int line, int column) {
         this.line = line;
         this.column = column;
+    }
+
+    public int getLine() {
+        return line;
+    }
+
+    public void setLine(int line) {
+        this.line = line;
     }
 
     public void nextLine() {
@@ -91,14 +99,6 @@ public class Position implements Comparable<Position> {
 
     public int getColumn() {
         return column;
-    }
-
-    public int getLine() {
-        return line;
-    }
-
-    public void setLine(int line) {
-        this.line = line;
     }
 
     public void setColumn(int column) {

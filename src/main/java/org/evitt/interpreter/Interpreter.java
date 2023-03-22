@@ -18,6 +18,8 @@ package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
 import org.evitt.eval.*;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -29,49 +31,49 @@ public class Interpreter implements Visitor<Expr> {
     }
 
     @Override
-    public Expr visit(BooleanExpr b) {
+    public Expr visit(@NotNull BooleanExpr b) {
         return b;
     }
 
     @Override
-    public Expr visit(IntExpr i) {
+    public Expr visit(@NotNull IntExpr i) {
         return i;
     }
 
     @Override
-    public Expr visit(FloatExpr f) {
+    public Expr visit(@NotNull FloatExpr f) {
         return f;
     }
 
     @Override
-    public Expr visit(StringExpr s) {
+    public Expr visit(@NotNull StringExpr s) {
         return s;
     }
 
     @Override
-    public Expr visit(Symbol s) {
+    public @Nullable Expr visit(@NotNull Symbol s) {
         return env.get(s);
     }
 
     @Override
-    public Expr visit(Sequence s) {
+    public Expr visit(@NotNull Sequence s) {
         return s;
     }
 
     @Override
-    public Expr visit(Lambda l) {
+    public Expr visit(@NotNull Lambda l) {
         return l;
     }
 
     @Override
-    public Expr visit(Call c) {
+    public Expr visit(@NotNull Call c) {
 
         Expr func = visit(c.getName());
         var args = c.getArguments();
 
         if (func instanceof Lambda lfunc) {
             var newEnv = new Environment(env);
-            List<Symbol> params = lfunc.getParameters();
+            List<Symbol> params = lfunc.parameters();
 
             BuiltinUtils.require(args.size() == params.size(),
                                  c.getName() + " has " + c.getArguments().size() + " arguments.");
@@ -83,7 +85,7 @@ public class Interpreter implements Visitor<Expr> {
                 newEnv.set(param, arg);
             }
 
-            return visit(lfunc.getBody(), newEnv);
+            return visit(lfunc.body(), newEnv);
         } else if (func instanceof Builtin builtinFunc) {
             var newEnv = new Environment(env);
 
@@ -95,11 +97,11 @@ public class Interpreter implements Visitor<Expr> {
 
 
     @Override
-    public Expr visit(Builtin bf) {
+    public Expr visit(@NotNull Builtin bf) {
         return bf;
     }
 
-    private Expr visit(Expr expr, Environment newEnv) {
+    private Expr visit(@NotNull Expr expr, Environment newEnv) {
         Environment oldEnv = this.env;
         this.env = newEnv;
         Expr result = visit(expr);

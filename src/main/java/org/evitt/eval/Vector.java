@@ -16,18 +16,21 @@
 
 package org.evitt.eval;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.Collection;
 
 public final class Vector implements Sequence {
 
-    private final ArrayList<Expr> values;
+    private final @NotNull ArrayList<Expr> values;
 
-    public Vector(Collection<Expr> values) {
+    public Vector(@NotNull Collection<Expr> values) {
         this.values = new ArrayList<>(values);
     }
 
-    public Vector(Sequence other) {
+    public Vector(@NotNull Sequence other) {
         values = new ArrayList<>();
         for (int i = 0; i < (int) other.length().getValue(); i++) {
 
@@ -45,17 +48,17 @@ public final class Vector implements Sequence {
     }
 
     @Override
-    public Sequence getRest() {
+    public @Nullable Sequence getRest() {
         return null;
     }
 
     @Override
-    public Expr nth(int n) {
+    public @Nullable Expr nth(int n) {
         return null;
     }
 
     @Override
-    public FloatExpr length() {
+    public @Nullable FloatExpr length() {
         return null;
     }
 }
