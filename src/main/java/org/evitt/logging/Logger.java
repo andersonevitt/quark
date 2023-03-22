@@ -23,6 +23,11 @@ public class Logger {
     private static Level logLevel;
     private static LoggerOutput loggerOutput;
 
+    static {
+        setLogLevel(Level.INFO);
+        setLoggerOutput(new StdoutLogger());
+    }
+
     public static void trace(@NotNull String message, Object... args) {
         log(Level.TRACE, message, args);
     }
