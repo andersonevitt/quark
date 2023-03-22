@@ -14,28 +14,13 @@
  * limitations under the License.
  */
 
-package org.evitt.lexer;
+package org.evitt.eval;
 
-import org.jetbrains.annotations.NotNull;
+public sealed interface Expr permits BooleanExpr, Builtin, Call,
+        FloatExpr, IntExpr, Lambda, Sequence, StringExpr, Symbol {
+    Object getValue();
 
-public final class LeftParenToken implements Token {
-    @Override
-    public @NotNull Object getValue() {
-        return "(";
-    }
-
-    @Override
-    public int hashCode() {
-        return 42;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof LeftParenToken;
-    }
-
-    @Override
-    public @NotNull String toString() {
-        return "LEFT_PAREN";
+    default <T> T accept(Visitor<T> v) {
+        return v.visit(this);
     }
 }

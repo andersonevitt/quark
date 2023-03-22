@@ -17,7 +17,7 @@
 package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
-import org.evitt.parser.Expr;
+import org.evitt.eval.Expr;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

@@ -14,14 +14,15 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
+
 
 import org.jetbrains.annotations.NotNull;
 
-public record IntExpr(int value) implements Expr {
+public record FloatExpr(double value) implements Expr {
 
     public @NotNull String toString() {
-        return Integer.toString(value);
+        return Double.toString(value);
     }
 
     public @NotNull Object getValue() {

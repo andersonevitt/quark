@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package org.evitt.lexer;
+package org.evitt.eval;
 
 import org.jetbrains.annotations.NotNull;
 
-public record FloatToken(double value) implements Token {
-    public @NotNull Object getValue() {
-        return value;
+public record BooleanExpr(boolean value) implements Expr {
+    @Override
+    public @NotNull String toString() {
+        return Boolean.toString(value);
     }
 
     @Override
-    public @NotNull String toString() {
-        return "FLOAT(" + value + ")";
+    public Object getValue() {
+        return value;
     }
 }

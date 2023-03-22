@@ -14,18 +14,44 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
 import org.jetbrains.annotations.NotNull;
 
-public record BooleanExpr(boolean value) implements Expr {
-    @Override
+import java.util.List;
+
+
+public final class Call implements Expr {
+    private final Symbol name;
+    private final List<Expr> arguments;
+
+    public Call(Symbol function, List<Expr> arguments) {
+        this.name = function;
+        this.arguments = arguments;
+    }
+
+    public Symbol getName() {
+        return name;
+    }
+
+    public List<Expr> getArguments() {
+        return arguments;
+    }
+
     public @NotNull String toString() {
-        return Boolean.toString(value);
+        StringBuilder sb = new StringBuilder();
+        sb.append("(");
+        sb.append(name);
+        for (Expr arg : arguments) {
+            sb.append(" ");
+            sb.append(arg);
+        }
+        sb.append(")");
+        return sb.toString();
     }
 
     @Override
     public Object getValue() {
-        return value;
+        return arguments;
     }
 }

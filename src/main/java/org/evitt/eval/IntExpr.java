@@ -16,9 +16,15 @@
 
 package org.evitt.eval;
 
+import org.jetbrains.annotations.NotNull;
 
-import org.evitt.parser.Expr;
+public record IntExpr(int value) implements Expr {
 
-public interface Evaluator {
-    Object eval(Expr expr);
+    public @NotNull String toString() {
+        return Integer.toString(value);
+    }
+
+    public @NotNull Object getValue() {
+        return value;
+    }
 }

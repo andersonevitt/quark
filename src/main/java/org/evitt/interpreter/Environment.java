@@ -16,9 +16,9 @@
 
 package org.evitt.interpreter;
 
-import org.evitt.parser.BuiltinFunction;
-import org.evitt.parser.Expr;
-import org.evitt.parser.Symbol;
+import org.evitt.eval.Builtin;
+import org.evitt.eval.Expr;
+import org.evitt.eval.Symbol;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -36,16 +36,16 @@ public class Environment {
     }
 
     private void initialize() {
-        set("def", (BuiltinFunction) CoreLibrary::define);
+        set("def", (Builtin) CoreLibrary::define);
 
-        set("+", (BuiltinFunction) CoreLibrary::add);
-        set("-", (BuiltinFunction) CoreLibrary::subtract);
-        set("*", (BuiltinFunction) CoreLibrary::multiply);
-        set("/", (BuiltinFunction) CoreLibrary::divide);
-        set("^", (BuiltinFunction) CoreLibrary::power);
-        set("not", (BuiltinFunction) CoreLibrary::not);
-        set("and", (BuiltinFunction) CoreLibrary::and);
-        set("or", (BuiltinFunction) CoreLibrary::or);
+        set("+", (Builtin) CoreLibrary::add);
+        set("-", (Builtin) CoreLibrary::subtract);
+        set("*", (Builtin) CoreLibrary::multiply);
+        set("/", (Builtin) CoreLibrary::divide);
+        set("^", (Builtin) CoreLibrary::power);
+        set("not", (Builtin) CoreLibrary::not);
+        set("and", (Builtin) CoreLibrary::and);
+        set("or", (Builtin) CoreLibrary::or);
 
     }
 

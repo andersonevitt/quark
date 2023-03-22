@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
 /**
  * An immutable collection that represents a sequence of values.

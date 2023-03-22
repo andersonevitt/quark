@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
 import org.jetbrains.annotations.NotNull;
 

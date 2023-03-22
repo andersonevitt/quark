@@ -16,7 +16,7 @@
 
 package org.evitt.interpreter;
 
-import org.evitt.parser.*;
+import org.evitt.eval.*;
 
 public class PrinterVisitor implements Visitor<String> {
 
@@ -73,7 +73,7 @@ public class PrinterVisitor implements Visitor<String> {
     }
 
     @Override
-    public String visit(BuiltinFunction bf) {
+    public String visit(Builtin bf) {
         return bf.toString();
     }
 }

@@ -16,6 +16,7 @@
 
 package org.evitt.parser;
 
+import org.evitt.eval.*;
 import org.evitt.lexer.*;
 import org.evitt.util.PeekableIterator;
 import org.jetbrains.annotations.NotNull;
@@ -26,7 +27,7 @@ import java.util.List;
 
 public class Parser implements Iterator<Expr> {
     private final @NotNull PeekableIterator<Token> lexer;
-    private final Position position;
+    private final @NotNull Position position;
 
     public Parser(@NotNull Lexer lexer) {
         this.lexer = PeekableIterator.of(lexer);
@@ -45,49 +46,49 @@ public class Parser implements Iterator<Expr> {
 
     public @NotNull Expr parse() {
         if (!lexer.hasNext()) {
-            throw new ParserException("No more tokens");
+            throw new ParserException(this.position, "Unexpected EOF");
         }
 
-        if (lexer.peek() instanceof SymbolToken) {
-            return new Symbol((String) lexer.next().getValue());
-        }
-
-        if (lexer.peek() instanceof IntToken) {
-            return new IntExpr((int) lexer.next().getValue());
-        }
-
-        if (lexer.peek() instanceof FloatToken) {
-            return new FloatExpr((int) lexer.next().getValue());
-        }
-
-        if (lexer.peek() instanceof StringToken) {
-            return new StringExpr((String) lexer.next().getValue());
-        }
-
-        if (lexer.peek() instanceof BooleanToken) {
-            return new BooleanExpr((Boolean) lexer.next().getValue());
-        }
-
-        if (lexer.peek() instanceof LeftParenToken) {
-            List<Expr> exprs = new LinkedList<>();
-            lexer.next();
-
-            while (!(lexer.peek() instanceof RightParenToken)) {
-                exprs.add(parse());
+        switch (lexer.peek().type()) {
+            case SYMBOL -> {
+                return new Symbol((String) lexer.next().getValue());
+            }
+            case INTEGER -> {
+                return new IntExpr((int) lexer.next().getValue());
             }
 
-            lexer.next();
+            case FLOAT -> {
+                return new FloatExpr((int) lexer.next().getValue());
+            }
 
-            var first = (Symbol) exprs.remove(0);
-            return new Call(first, exprs);
+            case STRING -> {
+                return new StringExpr((String) lexer.next().getValue());
+            }
+
+            case BOOLEAN -> {
+                return new BooleanExpr((Boolean) lexer.next().getValue());
+            }
+
+            case LEFT_PAREN -> {
+                List<Expr> exprs = new LinkedList<>();
+                lexer.next();
+
+                while (lexer.peek().type() != Token.Type.RIGHT_PAREN) {
+                    exprs.add(parse());
+                }
+
+                lexer.next();
+
+                var first = (Symbol) exprs.remove(0);
+                return new Call(first, exprs);
+            }
+
+            case RIGHT_PAREN -> {
+                throw new ParserException(position, "Unexpected right parenthesis");
+            }
+
+            default -> throw new IllegalStateException("Unable to match " +
+                    "Token: " + lexer.peek().type());
         }
-
-
-        if (lexer.peek() instanceof RightParenToken) {
-            throw new ParserException(position, "Unexpected right parenthesis");
-        }
-
-
-        throw new IllegalStateException("Unable to match token");
     }
 }

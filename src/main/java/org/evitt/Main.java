@@ -22,13 +22,14 @@ import org.evitt.interpreter.Interpreter;
 import org.evitt.lexer.CharacterStream;
 import org.evitt.lexer.Lexer;
 import org.evitt.logging.Logger;
+import org.evitt.logging.Logger.Level;
 import org.evitt.logging.StdoutLogger;
 import org.evitt.parser.Parser;
 
 public class Main {
     public static void main(String[] args) {
         Logger.setLoggerOutput(new StdoutLogger());
-        Logger.setLogLevel(Logger.Level.TRACE);
+        Logger.setLogLevel(Level.TRACE);
         var stream = new CharacterStream("(def x (+ 10 12 32))");
         var lexer = new Lexer(stream);
         var root = new Parser(lexer).next();

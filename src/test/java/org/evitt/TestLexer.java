@@ -17,6 +17,7 @@
 package org.evitt;
 
 import org.evitt.lexer.*;
+import org.evitt.util.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedList;
@@ -38,7 +39,7 @@ public class TestLexer {
         matches("\"some string getValue\"", new StringToken("some string getValue"));
     }
 
-    private void matches(String source, Token token) {
+    private void matches(String source, org.evitt.util.Token token) {
         assertThat(create(source).next()).isEqualTo(token);
     }
 
@@ -58,8 +59,8 @@ public class TestLexer {
                 new RightParenToken()));
     }
 
-    private void matches(String source, List<Token> tokens) {
-        List<Token> sourceTokens = new LinkedList<>();
+    private void matches(String source, List<org.evitt.util.Token> tokens) {
+        List<org.evitt.util.Token> sourceTokens = new LinkedList<>();
         create(source).forEachRemaining(sourceTokens::add);
 
         assertThat(tokens).isEqualTo(sourceTokens);
@@ -76,21 +77,21 @@ public class TestLexer {
     @Test
     void testLeftParenToken() {
         Lexer lexer = new Lexer(new CharacterStream("("));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(LeftParenToken.class);
     }
 
     @Test
     void testRightParenToken() {
         Lexer lexer = new Lexer(new CharacterStream(")"));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(RightParenToken.class);
     }
 
     @Test
     void testSymbolToken() {
         Lexer lexer = new Lexer(new CharacterStream("abc"));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(SymbolToken.class);
         assertThat(token.getValue()).isEqualTo("abc");
     }
@@ -98,7 +99,7 @@ public class TestLexer {
     @Test
     void testIntegerToken() {
         Lexer lexer = new Lexer(new CharacterStream("123"));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(IntToken.class);
         assertThat(((IntToken) token).getValue()).isEqualTo(123);
     }
@@ -106,7 +107,7 @@ public class TestLexer {
     @Test
     void testStringToken() {
         Lexer lexer = new Lexer(new CharacterStream("\"hello\""));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(StringToken.class);
         assertThat(token.getValue()).isEqualTo("hello");
     }
@@ -126,7 +127,7 @@ public class TestLexer {
     @Test
     void testSingleSymbol() {
         Lexer lexer = new Lexer(new CharacterStream("a"));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(SymbolToken.class);
         assertThat(token.getValue()).isEqualTo("a");
         assertThat(lexer.next()).isNull();
@@ -135,7 +136,7 @@ public class TestLexer {
     @Test
     void testNegativeInteger() {
         Lexer lexer = new Lexer(new CharacterStream("-123"));
-        Token token = lexer.next();
+        org.evitt.util.Token token = lexer.next();
         assertThat(token).isInstanceOf(IntToken.class);
         assertThat(((IntToken) token).getValue()).isEqualTo(-123);
         assertThat(lexer.next()).isNull();

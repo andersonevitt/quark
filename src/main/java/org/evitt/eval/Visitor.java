@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
 import org.evitt.EvaluationException;
 
@@ -37,7 +37,7 @@ public interface Visitor<T> {
 
     T visit(Call c);
 
-    T visit(BuiltinFunction bf);
+    T visit(Builtin bf);
 
     // Horrific hack to dynamically dispatch calls where the subtype isn't
     // known at compile time

@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package org.evitt.lexer;
+package org.evitt.eval;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.evitt.interpreter.Environment;
 
-public record BooleanToken(boolean value) implements Token {
-    @Override
-    public @NotNull String toString() {
-        return "BOOLEAN(" + value + ")";
-    }
+import java.util.List;
+
+public non-sealed interface Builtin extends Expr {
+    Expr apply(Environment env, List<Expr> arguments);
 
     @Override
-    public @NotNull Object getValue() {
-        return value;
+    default Object getValue() {
+        return "Builtin";
     }
 }

@@ -17,10 +17,10 @@
 package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
-import org.evitt.parser.BooleanExpr;
-import org.evitt.parser.Expr;
-import org.evitt.parser.FloatExpr;
-import org.evitt.parser.Symbol;
+import org.evitt.eval.BooleanExpr;
+import org.evitt.eval.Expr;
+import org.evitt.eval.FloatExpr;
+import org.evitt.eval.Symbol;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;

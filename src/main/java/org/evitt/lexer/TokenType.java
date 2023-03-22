@@ -16,27 +16,11 @@
 
 package org.evitt.lexer;
 
-import org.jetbrains.annotations.NotNull;
-
-public final class RightParenToken implements Token {
-    @Override
-    public @NotNull Object getValue() {
-        return ")";
-    }
-
-    @Override
-    public int hashCode() {
-        return 37;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        return obj instanceof RightParenToken;
-    }
-
-    @Override
-    public @NotNull String toString() {
-        return "RIGHT_PAREN";
-    }
+public enum TokenType {
+    BOOLEAN,
+    INTEGER,
+    FLOAT,
+    SYMBOL,
+    LEFT_PAREN,
+    RIGHT_PAREN,
 }
-

@@ -18,57 +18,43 @@ package org.evitt.lexer;
 
 import org.jetbrains.annotations.NotNull;
 
-public sealed interface Token permits BooleanToken, FloatToken, IntToken,
-        LeftParenToken, RightParenToken, StringToken, SymbolToken {
-    Token LEFT_PAREN = new LeftParenToken();
-    Token RIGHT_PAREN = new RightParenToken();
-    Token BOOL_TRUE = new BooleanToken(true);
-    Token BOOL_FALSE = new BooleanToken(false);
-
-    static @NotNull Token getTrue() {
-        return BOOL_TRUE;
+public record Token(Type type, Object value, Position position) {
+    public enum Type {
+        BOOLEAN,
+        INTEGER,
+        FLOAT,
+        SYMBOL,
+        STRING,
+        LEFT_PAREN,
+        RIGHT_PAREN,
     }
 
-    static @NotNull Token getFalse() {
-        return BOOL_FALSE;
+    public Token(Type type, Position position) {
+        this(type, null, position);
     }
 
-    static @NotNull Token getLeftParen() {
-        return LEFT_PAREN;
-    }
-
-    static @NotNull Token getRightParen() {
-        return RIGHT_PAREN;
-    }
-
-    static @NotNull Token getString(String value) {
-        // TODO: See if interning would actually yields better performance
-        return new StringToken(value);
-    }
-
-    static @NotNull Token getSymbolOrNumber(@NotNull String matched) {
+    static @NotNull Token getSymbolOrNumber(@NotNull String matched,
+                                            Position p) {
         try {
-            return getInteger(Integer.parseInt(matched));
+            return new Token(Type.INTEGER, Integer.parseInt(matched), p);
         } catch (NumberFormatException e1) {
             try {
-                return getFloat(Double.parseDouble(matched));
+                return new Token(Type.FLOAT, Double.parseDouble(matched), p);
             } catch (NumberFormatException e2) {
-                return getSymbol(matched);
+                return new Token(Type.SYMBOL, matched, p);
             }
         }
     }
 
-    static @NotNull Token getInteger(int value) {
-        return new IntToken(value);
+    public Object getValue() {
+        return value;
     }
 
-    static @NotNull Token getFloat(double value) {
-        return new FloatToken(value);
-    }
+    public String toString() {
+        if (value != null) {
+            return type + "(" + value + ")";
+        }
 
-    static @NotNull Token getSymbol(String name) {
-        return new SymbolToken(name);
+        return type.toString();
     }
-
-    Object getValue();
 }

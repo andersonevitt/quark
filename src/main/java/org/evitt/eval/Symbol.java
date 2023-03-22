@@ -14,21 +14,20 @@
  * limitations under the License.
  */
 
-package org.evitt.lexer;
+package org.evitt.eval;
 
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class StringToken implements Token {
-    private final String value;
+public final class Symbol implements Expr {
+    private final String name;
 
-    public StringToken(String value) {
-        this.value = value;
+    public Symbol(String name) {
+        this.name = name;
     }
 
     @Override
     public int hashCode() {
-        return getValue() != null ? getValue().hashCode() : 0;
+        return getName() != null ? getName().hashCode() : 0;
     }
 
     @Override
@@ -36,19 +35,22 @@ public final class StringToken implements Token {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        StringToken that = (StringToken) o;
+        Symbol symbol = (Symbol) o;
 
-        return getValue() != null ? getValue().equals(that.getValue()) :
-                that.getValue() == null;
+        return getName() != null ? getName().equals(symbol.getName()) :
+                symbol.getName() == null;
     }
 
-    @Override
-    public @NotNull String toString() {
-        return "STRING(\"" + value + "\")";
+    public String toString() {
+        return name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
     public Object getValue() {
-        return value;
+        return name;
     }
 }

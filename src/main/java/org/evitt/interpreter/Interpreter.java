@@ -17,7 +17,7 @@
 package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
-import org.evitt.parser.*;
+import org.evitt.eval.*;
 
 import java.util.List;
 
@@ -85,7 +85,7 @@ public class Interpreter implements Visitor<Expr> {
             }
 
             return visit(lfunc.getBody(), newEnv);
-        } else if (func instanceof BuiltinFunction builtinFunc) {
+        } else if (func instanceof Builtin builtinFunc) {
             var newEnv = new Environment(env);
 
             return builtinFunc.apply(newEnv, args);
@@ -96,7 +96,7 @@ public class Interpreter implements Visitor<Expr> {
 
 
     @Override
-    public Expr visit(BuiltinFunction bf) {
+    public Expr visit(Builtin bf) {
         return bf;
     }
 

@@ -14,58 +14,34 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
-import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import java.util.List;
+public final class Vector implements Sequence {
 
-public final class ListExpr implements Sequence {
-    private List<Expr> exprs;
+    private final ArrayList<Expr> values;
 
-    public ListExpr(List<Expr> exprs) {
-        this.exprs = exprs;
+    public Vector(Collection<Expr> values) {
+        this.values = new ArrayList<>(values);
     }
 
-    public List<Expr> getValues() {
-        return exprs;
-    }
+    public Vector(Sequence other) {
+        values = new ArrayList<>();
+        for (int i = 0; i < (int) other.length().getValue(); i++) {
 
-    public void setValues(List<Expr> exprs) {
-        this.exprs = exprs;
-    }
-
-    public @NotNull String toString() {
-        if (exprs.isEmpty()) {
-            return "()";
         }
-
-        StringBuilder body = new StringBuilder();
-        body.append("(");
-
-        for (int i = 0; i < exprs.size() - 1; i++) {
-            body.append(exprs.get(i)).append(" ");
-        }
-
-        body.append(exprs.get(exprs.size() - 1));
-        body.append(")");
-
-        return body.toString();
     }
 
     @Override
     public Object getValue() {
-        return exprs;
-    }
-
-    @Override
-    public <T> T accept(Visitor<T> v) {
-        throw new RuntimeException();
+        return values;
     }
 
     @Override
     public Expr getFirst() {
-        return null;
+        return values.get(0);
     }
 
     @Override

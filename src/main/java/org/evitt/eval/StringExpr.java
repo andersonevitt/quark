@@ -14,17 +14,19 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.eval;
 
-import org.evitt.interpreter.Environment;
 
-import java.util.List;
+import org.evitt.eval.Expr;
+import org.jetbrains.annotations.NotNull;
 
-public non-sealed interface BuiltinFunction extends Expr {
-    Expr apply(Environment env, List<Expr> arguments);
+public record StringExpr(String value) implements Expr {
+    public @NotNull String toString() {
+        return "\"" + value + "\"";
+    }
 
     @Override
-    default Object getValue() {
-        return "BuiltinFunction";
+    public Object getValue() {
+        return value;
     }
 }

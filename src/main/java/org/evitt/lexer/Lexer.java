@@ -52,12 +52,12 @@ public class Lexer implements Iterator<Token> {
         switch (stream.peek()) {
             case '(' -> {
                 stream.next();
-                return getLeftParen();
+                return new Token(Type.LEFT_PAREN, position);
             }
 
             case ')' -> {
                 stream.next();
-                return getRightParen();
+                return new Token(Type.RIGHT_PAREN, position);
             }
 
             case '\"' -> {
@@ -81,13 +81,13 @@ public class Lexer implements Iterator<Token> {
                         escaped = true;
                     } else if (stream.peek() == '\"') {
                         stream.next();
-                        return getString(matched.toString());
+                        return new Token(Type.STRING, matched.toString(), position);
                     } else {
                         matched.append(stream.next());
                     }
                 }
 
-                return getString(matched.toString());
+                return new Token(Type.STRING, matched.toString(), position);
             }
 
             case ';' -> {
@@ -110,12 +110,12 @@ public class Lexer implements Iterator<Token> {
                 var strMatched = matched.toString().intern();
 
                 if (strMatched.equals("true")) {
-                    return BOOL_TRUE;
+                    return new Token(Type.BOOLEAN, true, position);
                 } else if (strMatched.equals("false")) {
-                    return BOOL_FALSE;
+                    return new Token(Type.BOOLEAN, false, position);
                 }
 
-                return getSymbolOrNumber(matched.toString());
+                return Token.getSymbolOrNumber(matched.toString(), position);
             }
         }
     }

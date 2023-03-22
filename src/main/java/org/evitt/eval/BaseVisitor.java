@@ -14,63 +14,51 @@
  * limitations under the License.
  */
 
-package org.evitt.interpreter;
+package org.evitt.eval;
 
-import org.evitt.eval.*;
-import org.evitt.logging.Logger;
-
-public class ExprLogger implements Visitor<Void> {
+public class BaseVisitor<T> implements Visitor<T> {
     @Override
-    public Void visit(BooleanExpr b) {
-        Logger.debug("Visited boolean");
+    public T visit(BooleanExpr b) {
         return null;
     }
 
     @Override
-    public Void visit(IntExpr i) {
-        Logger.debug("Visited integer");
+    public T visit(IntExpr i) {
         return null;
     }
 
     @Override
-    public Void visit(FloatExpr f) {
-        Logger.debug("Visited float");
+    public T visit(FloatExpr f) {
         return null;
     }
 
     @Override
-    public Void visit(StringExpr s) {
-        Logger.debug("Visited string");
+    public T visit(StringExpr s) {
         return null;
     }
 
     @Override
-    public Void visit(Symbol s) {
-        Logger.debug("Visited symbol");
+    public T visit(Symbol s) {
         return null;
     }
 
     @Override
-    public Void visit(Sequence s) {
-        Logger.debug("Visited sequence");
+    public T visit(Sequence s) {
         return null;
     }
 
     @Override
-    public Void visit(Lambda l) {
-        Logger.debug("Visited lambda");
+    public T visit(Lambda l) {
         return null;
     }
 
     @Override
-    public Void visit(Call c) {
-        Logger.debug("Visited call");
+    public T visit(Call c) {
         return null;
     }
 
     @Override
-    public Void visit(Builtin bf) {
-        Logger.debug("Visited builtin");
+    public T visit(Builtin bf) {
         return null;
     }
 }
