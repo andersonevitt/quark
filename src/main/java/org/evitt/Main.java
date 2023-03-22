@@ -35,10 +35,8 @@ public class Main {
         var visitor = new Interpreter();
         var printer = new PrinterVisitor();
 
-        System.out.println("some");
-
-        System.out.println(printer.visit(root));
-        new ExprLogger().visit(root);
+        System.out.println(root.accept(printer));
+        root.accept(new ExprLogger());
         System.out.println(root.accept(visitor));
     }
 }

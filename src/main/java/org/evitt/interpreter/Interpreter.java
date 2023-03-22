@@ -80,7 +80,7 @@ public class Interpreter implements Visitor<Expr> {
             // Copy
             for (int i = 0; i < params.size(); i++) {
                 Symbol param = params.get(i);
-                Expr arg = visit((Symbol) args.get(i));
+                Expr arg = visit(args.get(i));
                 newEnv.set(param, arg);
             }
 

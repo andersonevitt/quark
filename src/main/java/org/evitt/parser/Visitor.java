@@ -16,6 +16,10 @@
 
 package org.evitt.parser;
 
+import org.evitt.EvaluationException;
+
+import java.lang.reflect.InvocationTargetException;
+
 public interface Visitor<T> {
     T visit(BooleanExpr b);
 
@@ -35,28 +39,25 @@ public interface Visitor<T> {
 
     T visit(BuiltinFunction bf);
 
-    // Hack to dynamically dispatch calls
-    default T visit(Expr e) {
-        if (e instanceof Symbol s) {
-          return visit(s);
-        } if (e instanceof BuiltinFunction bf) {
-            return visit(bf);
-        } else if (e instanceof Lambda l) {
-            return visit(l);
-        } else if (e instanceof Call c) {
-            return visit(c);
-        } else if (e instanceof StringExpr s) {
-            return visit(s);
-        } else if (e instanceof IntExpr i) {
-            return visit(i);
-        } else if (e instanceof FloatExpr f) {
-            return visit(f);
-        } else if (e instanceof BooleanExpr b) {
-            return visit(b);
-        } else if (e instanceof ListExpr l) {
-            return visit(l);
-        }
+    // Horrific hack to dynamically dispatch calls where the subtype isn't
+    // known at compile time
+    default <E extends Expr> T visit(E e) {
+        // TODO: This method could be explosive if another Expr subclass is
+        //  added but isn't added to visitor
 
-        throw new IllegalStateException("Unable to match type of expression");
+        try {
+            /*
+             Extremely stupid hack that finds the method with a matching
+             name, invokes it with correctly cast argument types, and
+             then casts the result back to the type that is wanted (unsafely)
+            */
+            var method = this.getClass().getMethod("visit", e.getClass());
+            return (T) method.invoke(this, e);
+
+        } catch (NoSuchMethodException | InvocationTargetException |
+                 IllegalAccessException ex) {
+            throw new EvaluationException(
+                    "Type error, unknown class " + e.getClass(), ex);
+        }
     }
 }
