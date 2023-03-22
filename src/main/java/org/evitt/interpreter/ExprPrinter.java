@@ -18,7 +18,7 @@ package org.evitt.interpreter;
 
 import org.evitt.eval.*;
 
-public class PrinterVisitor implements Visitor<String> {
+public class ExprPrinter implements Visitor<String> {
 
     @Override
     public String visit(BooleanExpr b) {

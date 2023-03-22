@@ -28,7 +28,7 @@ public class Logger {
     }
 
     public static void log(@NotNull Level currentLevel, @NotNull String message,
-                    @Nullable Object... args) {
+                           @Nullable Object... args) {
         if (logLevel.ordinal() < currentLevel.ordinal()) {
             loggerOutput.write(currentLevel, String.format(message, args));
         }

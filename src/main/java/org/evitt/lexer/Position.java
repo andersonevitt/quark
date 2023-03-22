@@ -20,13 +20,17 @@ package org.evitt.lexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class Position {
+public class Position implements Comparable<Position> {
     private int line;
     private int column;
 
     public Position() {
         line = 1;
         column = 1;
+    }
+
+    public Position(Position other) {
+        this(other.getLine(), other.getLine());
     }
 
     public Position(int line, int column) {
@@ -47,12 +51,14 @@ public class Position {
 
     @Override
     public boolean equals(@Nullable Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {return true;}
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Position position = (Position) o;
 
-        if (line != position.line) return false;
+        if (line != position.line) {return false;}
         return column == position.column;
     }
 
@@ -68,16 +74,31 @@ public class Position {
         column += 1;
     }
 
+    @Override
+    public int compareTo(@NotNull Position o) {
+        if (o.getColumn() < this.getColumn()) {
+            return -1;
+        } else if (o.getColumn() == this.column) {
+            if (o.getLine() < this.getLine()) {
+                return -1;
+            } else if (o.getLine() == this.getLine()) {
+                return 0;
+            }
+            return 1;
+        }
+        return 1;
+    }
+
+    public int getColumn() {
+        return column;
+    }
+
     public int getLine() {
         return line;
     }
 
     public void setLine(int line) {
         this.line = line;
-    }
-
-    public int getColumn() {
-        return column;
     }
 
     public void setColumn(int column) {

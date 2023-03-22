@@ -17,7 +17,9 @@
 package org.evitt.parser;
 
 import org.evitt.eval.*;
-import org.evitt.lexer.*;
+import org.evitt.lexer.Lexer;
+import org.evitt.lexer.Position;
+import org.evitt.lexer.Token;
 import org.evitt.util.PeekableIterator;
 import org.jetbrains.annotations.NotNull;
 
@@ -88,7 +90,7 @@ public class Parser implements Iterator<Expr> {
             }
 
             default -> throw new IllegalStateException("Unable to match " +
-                    "Token: " + lexer.peek().type());
+                                                               "Token: " + lexer.peek().type());
         }
     }
 }

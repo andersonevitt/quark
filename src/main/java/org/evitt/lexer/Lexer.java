@@ -21,7 +21,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Iterator;
 
-import static org.evitt.lexer.Token.*;
+import static org.evitt.lexer.Token.Type;
 
 public class Lexer implements Iterator<Token> {
     private final @NotNull CharacterStream stream;
@@ -46,8 +46,7 @@ public class Lexer implements Iterator<Token> {
     public @Nullable Token next() {
         skipWhitespace();
 
-        if (!hasNext())
-            return null;
+        if (!hasNext()) {return null;}
 
         switch (stream.peek()) {
             case '(' -> {
@@ -73,8 +72,7 @@ public class Lexer implements Iterator<Token> {
                             case 'n' -> '\n';
                             case '\\' -> '\\';
                             case '\"' -> '\"';
-                            default ->
-                                    matched.append('\\').append(stream.peek());
+                            default -> matched.append('\\').append(stream.peek());
                         });
                     } else if (stream.peek() == '\\') {
                         stream.next();

@@ -74,10 +74,9 @@ public class Interpreter implements Visitor<Expr> {
             List<Symbol> params = lfunc.getParameters();
 
             BuiltinUtils.require(args.size() == params.size(),
-                    c.getName() + " has " + c.getArguments().size() + " " +
-                            "arguments.");
+                                 c.getName() + " has " + c.getArguments().size() + " arguments.");
 
-            // Copy
+            // Copy params
             for (int i = 0; i < params.size(); i++) {
                 Symbol param = params.get(i);
                 Expr arg = visit(args.get(i));

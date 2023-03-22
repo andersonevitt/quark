@@ -71,10 +71,7 @@ public class CharacterStream implements PeekableIterator<Character> {
         try {
             char value = (char) reader.read();
 
-            if (value == '\n')
-                position.nextLine();
-            else if (value == '\r' && peek() == '\n')
-                position.nextLine();
+            if (value == '\n') {position.nextLine();} else if (value == '\r' && peek() == '\n') {position.nextLine();}
 
             position.nextColumn();
             return value;

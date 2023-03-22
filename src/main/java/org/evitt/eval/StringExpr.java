@@ -17,7 +17,6 @@
 package org.evitt.eval;
 
 
-import org.evitt.eval.Expr;
 import org.jetbrains.annotations.NotNull;
 
 public record StringExpr(String value) implements Expr {

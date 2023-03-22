@@ -31,7 +31,7 @@ public class BuiltinUtils {
     public static void requireArity(@NotNull List<Expr> args, int arity) {
         if (args.size() != arity) {
             throw new EvaluationException("Function requires " + arity +
-                    "arguments, only " + args.size() + " " + "supplied.");
+                                                  "arguments, only " + args.size() + " " + "supplied.");
         }
     }
 
@@ -42,7 +42,7 @@ public class BuiltinUtils {
     }
 
     public static void require(boolean expr, String message) {
-        if (!expr) throw new EvaluationException(message);
+        if (!expr) {throw new EvaluationException(message);}
     }
 
     public static void requireArgType(@NotNull List<Expr> args, int arg
@@ -52,6 +52,6 @@ public class BuiltinUtils {
     }
 
     public static void require(boolean expr) {
-        if (!expr) throw new EvaluationException();
+        if (!expr) {throw new EvaluationException();}
     }
 }
