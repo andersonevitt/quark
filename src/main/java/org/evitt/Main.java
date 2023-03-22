@@ -31,10 +31,11 @@ public class Main {
         Logger.setLogLevel(Logger.Level.TRACE);
         var stream = new CharacterStream("(def x (+ 10 12 32))");
         var lexer = new Lexer(stream);
-
         var root = new Parser(lexer).next();
         var visitor = new Interpreter();
         var printer = new PrinterVisitor();
+
+        System.out.println("some");
 
         System.out.println(printer.visit(root));
         new ExprLogger().visit(root);
