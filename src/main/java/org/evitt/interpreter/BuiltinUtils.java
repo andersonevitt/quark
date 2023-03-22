@@ -17,7 +17,7 @@
 package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
-import org.evitt.parser.Expression;
+import org.evitt.parser.Expr;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -26,31 +26,32 @@ import java.util.List;
  * Basic methods for working with builtin methods
  */
 public class BuiltinUtils {
-    public static void requireArity(@NotNull List<Expression> args, int arity) {
+    private BuiltinUtils() {}
+
+    public static void requireArity(@NotNull List<Expr> args, int arity) {
         if (args.size() != arity) {
-            throw new EvaluationException("Function requires " + arity + "arguments, only " + args.size() + " " +
-                    "supplied.");
+            throw new EvaluationException("Function requires " + arity +
+                    "arguments, only " + args.size() + " " + "supplied.");
         }
     }
 
-    public static void requireArityAtLeast(@NotNull List<Expression> args, int arity) {
+    public static void requireArityAtLeast(@NotNull List<Expr> args,
+                                           int arity) {
         require(args.size() <= arity,
                 "Function requires at least " + arity + "arguments, only " + args.size() + " supplied.");
     }
 
     public static void require(boolean expr, String message) {
-        if (!expr)
-            throw new EvaluationException(message);
+        if (!expr) throw new EvaluationException(message);
     }
 
-    public static void requireArgType(@NotNull List<Expression> args, int arg,
-                                      @NotNull Class<? extends Expression> clazz) {
+    public static void requireArgType(@NotNull List<Expr> args, int arg
+            , @NotNull Class<? extends Expr> clazz) {
         require(args.get(arg).getClass().isAssignableFrom(clazz),
                 "Argument " + arg + " must be of type " + clazz);
     }
 
     public static void require(boolean expr) {
-        if (!expr)
-            throw new EvaluationException();
+        if (!expr) throw new EvaluationException();
     }
 }

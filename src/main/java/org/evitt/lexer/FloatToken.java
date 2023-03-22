@@ -16,26 +16,15 @@
 
 package org.evitt.lexer;
 
-import org.evitt.util.PeekableIterator;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 
-public class PeekableLexer implements PeekableIterator<Token> {
-
-    PeekableLexer(Lexer lexer) {
+public record FloatToken(double value) implements Token {
+    public @NotNull Object getValue() {
+        return value;
     }
 
     @Override
-    public boolean hasNext() {
-        return false;
-    }
-
-    @Override
-    public @Nullable Token next() {
-        return null;
-    }
-
-    @Override
-    public @Nullable Token peek() {
-        return null;
+    public @NotNull String toString() {
+        return "FLOAT(" + value + ")";
     }
 }

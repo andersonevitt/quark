@@ -17,30 +17,8 @@
 package org.evitt.lexer;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public final class SymbolToken implements Token {
-    private final String name;
-
-    public SymbolToken(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public int hashCode() {
-        return getName() != null ? getName().hashCode() : 0;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        SymbolToken that = (SymbolToken) o;
-
-        return getName() != null ? getName().equals(that.getName()) : that.getName() == null;
-    }
-
+public record SymbolToken(String name) implements Token {
     @Override
     public @NotNull String toString() {
         return "SYMBOL(" + name + ")";

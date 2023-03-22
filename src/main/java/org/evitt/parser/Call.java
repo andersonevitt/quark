@@ -21,11 +21,11 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 
-public class Call implements Expression {
+public final class Call implements Expr {
     private final Symbol name;
-    private final List<Expression> arguments;
+    private final List<Expr> arguments;
 
-    public Call(Symbol function, List<Expression> arguments) {
+    public Call(Symbol function, List<Expr> arguments) {
         this.name = function;
         this.arguments = arguments;
     }
@@ -34,7 +34,7 @@ public class Call implements Expression {
         return name;
     }
 
-    public List<Expression> getArguments() {
+    public List<Expr> getArguments() {
         return arguments;
     }
 
@@ -42,7 +42,7 @@ public class Call implements Expression {
         StringBuilder sb = new StringBuilder();
         sb.append("(");
         sb.append(name);
-        for (Expression arg : arguments) {
+        for (Expr arg : arguments) {
             sb.append(" ");
             sb.append(arg);
         }

@@ -17,8 +17,8 @@
 package org.evitt.eval;
 
 
-import org.evitt.parser.Expression;
+import org.evitt.parser.Expr;
 
 public interface Evaluator {
-    Object eval(Expression expr);
+    Object eval(Expr expr);
 }

@@ -39,7 +39,9 @@ public class EvaluationException extends RuntimeException {
         super(cause);
     }
 
-    public EvaluationException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public EvaluationException(String message, Throwable cause,
+                               boolean enableSuppression,
+                               boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

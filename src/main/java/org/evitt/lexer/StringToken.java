@@ -38,7 +38,8 @@ public final class StringToken implements Token {
 
         StringToken that = (StringToken) o;
 
-        return getValue() != null ? getValue().equals(that.getValue()) : that.getValue() == null;
+        return getValue() != null ? getValue().equals(that.getValue()) :
+                that.getValue() == null;
     }
 
     @Override

@@ -16,15 +16,16 @@
 
 package org.evitt.parser;
 
-import org.evitt.interpreter.Environment;
 
-import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
-public non-sealed interface BuiltinFunction extends Expr {
-    Expr apply(Environment env, List<Expr> arguments);
+public record FloatExpr(double value) implements Expr {
 
-    @Override
-    default Object getValue() {
-        return "BuiltinFunction";
+    public @NotNull String toString() {
+        return Double.toString(value);
+    }
+
+    public @NotNull Object getValue() {
+        return value;
     }
 }

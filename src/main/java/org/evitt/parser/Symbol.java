@@ -18,7 +18,7 @@ package org.evitt.parser;
 
 import org.jetbrains.annotations.Nullable;
 
-public class Symbol implements Expression {
+public final class Symbol implements Expr {
     private final String name;
 
     public Symbol(String name) {
@@ -37,7 +37,8 @@ public class Symbol implements Expression {
 
         Symbol symbol = (Symbol) o;
 
-        return getName() != null ? getName().equals(symbol.getName()) : symbol.getName() == null;
+        return getName() != null ? getName().equals(symbol.getName()) :
+                symbol.getName() == null;
     }
 
     public String toString() {

@@ -21,25 +21,23 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.nio.file.Path;
+import java.util.NoSuchElementException;
 
 public class CharacterStream implements PeekableIterator<Character> {
     private final BufferedReader reader;
-    private final @NotNull Position position;
+    private final @NotNull Position position = new Position();
 
 
     public CharacterStream(BufferedReader reader) {
         this.reader = reader;
-        this.position = new Position();
     }
 
     public CharacterStream(@NotNull InputStream stream) {
         this.reader = new BufferedReader(new InputStreamReader(stream));
-        this.position = new Position();
     }
 
     public CharacterStream(@NotNull String source) {
         this.reader = new BufferedReader(new StringReader(source));
-        this.position = new Position();
     }
 
     public CharacterStream(@NotNull Path input) throws FileNotFoundException {
@@ -47,8 +45,8 @@ public class CharacterStream implements PeekableIterator<Character> {
     }
 
     public CharacterStream(@NotNull File input) throws FileNotFoundException {
-        this.reader = new BufferedReader(new InputStreamReader(new FileInputStream(input)));
-        this.position = new Position(0, 0);
+        this.reader =
+                new BufferedReader(new InputStreamReader(new FileInputStream(input)));
     }
 
     @Override
@@ -69,7 +67,7 @@ public class CharacterStream implements PeekableIterator<Character> {
     }
 
     @Override
-    public @NotNull Character next() {
+    public @NotNull Character next() throws NoSuchElementException {
         try {
             char value = (char) reader.read();
 

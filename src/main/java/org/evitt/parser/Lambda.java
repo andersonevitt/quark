@@ -20,11 +20,11 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class Lambda implements Expression {
+public final class Lambda implements Expr {
     private final List<Symbol> parameters;
-    private final Expression body;
+    private final Expr body;
 
-    public Lambda(List<Symbol> parameters, Expression body) {
+    public Lambda(List<Symbol> parameters, Expr body) {
         this.parameters = parameters;
         this.body = body;
     }
@@ -33,7 +33,7 @@ public class Lambda implements Expression {
         return parameters;
     }
 
-    public Expression getBody() {
+    public Expr getBody() {
         return body;
     }
 

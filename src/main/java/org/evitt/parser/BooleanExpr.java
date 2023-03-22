@@ -18,7 +18,7 @@ package org.evitt.parser;
 
 import org.jetbrains.annotations.NotNull;
 
-public record BooleanExpr(boolean value) implements Expression {
+public record BooleanExpr(boolean value) implements Expr {
     @Override
     public @NotNull String toString() {
         return Boolean.toString(value);

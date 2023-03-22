@@ -16,16 +16,11 @@
 
 package org.evitt.parser;
 
+public sealed interface Expr permits BooleanExpr, BuiltinFunction, Call,
+        FloatExpr, IntExpr, Lambda, Sequence, StringExpr, Symbol {
+    Object getValue();
 
-import org.jetbrains.annotations.NotNull;
-
-public record NumberExpr(double value) implements Expression {
-
-    public @NotNull String toString() {
-        return Double.toString(value);
-    }
-
-    public Object getValue() {
-        return value;
+    default <T> T accept(Visitor<T> v) {
+        return v.visit(this);
     }
 }

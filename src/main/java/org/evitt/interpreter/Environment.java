@@ -17,7 +17,7 @@
 package org.evitt.interpreter;
 
 import org.evitt.parser.BuiltinFunction;
-import org.evitt.parser.Expression;
+import org.evitt.parser.Expr;
 import org.evitt.parser.Symbol;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,7 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Environment {
-    private final @NotNull Map<Symbol, Expression> values;
+    private final @NotNull Map<Symbol, Expr> values;
     private final @Nullable Environment parent;
 
     public Environment() {
@@ -49,11 +49,11 @@ public class Environment {
 
     }
 
-    public void set(String name, Expression value) {
+    public void set(String name, Expr value) {
         set(new Symbol(name), value);
     }
 
-    public void set(Symbol name, Expression value) {
+    public void set(Symbol name, Expr value) {
         Environment env = this.findEnvironment(name);
         if (env != null) {
             env.values.put(name, value);
@@ -76,7 +76,7 @@ public class Environment {
         initialize();
     }
 
-    public @NotNull Map<Symbol, Expression> getValues() {
+    public @NotNull Map<Symbol, Expr> getValues() {
         return values;
     }
 
@@ -88,11 +88,11 @@ public class Environment {
         return findEnvironment(name) != null;
     }
 
-    public @Nullable Expression get(String name) {
+    public @Nullable Expr get(String name) {
         return get(new Symbol(name));
     }
 
-    public @Nullable Expression get(Symbol name) {
+    public @Nullable Expr get(Symbol name) {
         Environment env = this.findEnvironment(name);
         if (env != null && env.values.containsKey(name)) {
             return env.values.get(name);

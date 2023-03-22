@@ -14,39 +14,17 @@
  * limitations under the License.
  */
 
-package org.evitt.lexer;
+package org.evitt.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-public final class IntegerToken implements Token {
-    private final int value;
+public record IntExpr(int value) implements Expr {
 
-    public IntegerToken(int value) {
-        this.value = value;
-    }
-
-    @Override
-    public int hashCode() {
-        return value;
-    }
-
-    @Override
-    public boolean equals(@Nullable Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        IntegerToken that = (IntegerToken) o;
-
-        return getValue() == that.getValue();
+    public @NotNull String toString() {
+        return Integer.toString(value);
     }
 
     public @NotNull Object getValue() {
         return value;
-    }
-
-    @Override
-    public @NotNull String toString() {
-        return "INTEGER(" + value + ")";
     }
 }

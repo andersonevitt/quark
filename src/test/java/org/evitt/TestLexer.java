@@ -32,8 +32,8 @@ public class TestLexer {
         matches("(", new LeftParenToken());
         matches(")", new RightParenToken());
 
-        matches("10", new IntegerToken(10));
-        matches("99", new IntegerToken(99));
+        matches("10", new IntToken(10));
+        matches("99", new IntToken(99));
 
         matches("\"some string getValue\"", new StringToken("some string getValue"));
     }
@@ -99,8 +99,8 @@ public class TestLexer {
     void testIntegerToken() {
         Lexer lexer = new Lexer(new CharacterStream("123"));
         Token token = lexer.next();
-        assertThat(token).isInstanceOf(IntegerToken.class);
-        assertThat(((IntegerToken) token).getValue()).isEqualTo(123);
+        assertThat(token).isInstanceOf(IntToken.class);
+        assertThat(((IntToken) token).getValue()).isEqualTo(123);
     }
 
     @Test
@@ -136,8 +136,8 @@ public class TestLexer {
     void testNegativeInteger() {
         Lexer lexer = new Lexer(new CharacterStream("-123"));
         Token token = lexer.next();
-        assertThat(token).isInstanceOf(IntegerToken.class);
-        assertThat(((IntegerToken) token).getValue()).isEqualTo(-123);
+        assertThat(token).isInstanceOf(IntToken.class);
+        assertThat(((IntToken) token).getValue()).isEqualTo(-123);
         assertThat(lexer.next()).isNull();
     }
 

@@ -16,67 +16,53 @@
 
 package org.evitt.logging;
 
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public class Logger {
+    private static Level logLevel;
+    private static LoggerOutput loggerOutput;
+
+    public static void trace(@NotNull String message, Object... args) {
+        log(Level.TRACE, message, args);
+    }
+
+    public static void log(@NotNull Level currentLevel, @NotNull String message,
+                    @Nullable Object... args) {
+        if (logLevel.ordinal() < currentLevel.ordinal()) {
+            loggerOutput.write(currentLevel, String.format(message, args));
+        }
+    }
+
+    public static void debug(@NotNull String message, Object... args) {
+        log(Level.DEBUG, message, args);
+    }
+
+    public static void info(@NotNull String message, Object... args) {
+        log(Level.INFO, message, args);
+    }
+
+    public static void warn(@NotNull String message, Object... args) {
+        log(Level.WARN, message, args);
+    }
+
+    public static void error(@NotNull String message, Object... args) {
+        log(Level.ERROR, message, args);
+    }
+
+    public static void setLogLevel(Level logLevel) {
+        Logger.logLevel = logLevel;
+    }
+
+    public static void setLoggerOutput(LoggerOutput loggerOutput) {
+        Logger.loggerOutput = loggerOutput;
+    }
+
     public enum Level {
         TRACE,
         DEBUG,
         INFO,
         WARN,
         ERROR
-    }
-
-    private Level logLevel;
-    private LoggerOutput loggerOutput;
-
-    public Logger(Level logLevel, LoggerOutput loggerOutput) {
-        this.logLevel = logLevel;
-        this.loggerOutput = loggerOutput;
-    }
-
-    public Logger(Level logLevel) {
-        this.logLevel = logLevel;
-        loggerOutput = new StdoutLogger();
-    }
-
-    public Logger() {
-        this(Level.WARN);
-    }
-
-    public void log(@NotNull Level currentLevel, @NotNull String message, @Nullable Object... args) {
-        if (logLevel.ordinal() < currentLevel.ordinal()) {
-            loggerOutput.write(currentLevel, String.format(message, args));
-        }
-    }
-
-    public void trace(@NotNull String message, Object... args) {
-        log(Level.TRACE, message, args);
-    }
-
-    public void debug(@NotNull String message, Object... args) {
-        log(Level.DEBUG, message, args);
-    }
-
-    public void info(@NotNull String message, Object... args) {
-        log(Level.INFO, message, args);
-    }
-
-    public void warn(@NotNull String message, Object... args) {
-        log(Level.WARN, message, args);
-    }
-
-    public void error(@NotNull String message, Object... args) {
-        log(Level.ERROR, message, args);
-    }
-
-    public void setLogLevel(Level logLevel) {
-        this.logLevel = logLevel;
-    }
-
-    public void setLoggerOutput(LoggerOutput loggerOutput) {
-        this.loggerOutput = loggerOutput;
     }
 }

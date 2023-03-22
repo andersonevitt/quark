@@ -16,13 +16,16 @@
 
 package org.evitt.parser;
 
-public interface Sequence extends Expression {
+/**
+ * An immutable collection that represents a sequence of values.
+ */
+public sealed interface Sequence extends Expr permits ListExpr, Vector {
     /**
      * Returns the first item in the sequence.
      *
      * @return the first item in the sequence
      */
-    Expression getFirst();
+    Expr getFirst();
 
     /**
      * Returns a sequence with the rest of the values in the sequence
@@ -33,10 +36,11 @@ public interface Sequence extends Expression {
 
     /**
      * Gets the nth getValue in the sequence
+     *
      * @param n the index of the item to return
      * @return nth item
      */
-    Expression nth(int n);
+    Expr nth(int n);
 
-    NumberExpr length();
+    FloatExpr length();
 }

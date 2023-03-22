@@ -16,27 +16,28 @@
 
 package org.evitt;
 
+import org.evitt.interpreter.ExprLogger;
+import org.evitt.interpreter.PrinterVisitor;
 import org.evitt.interpreter.Interpreter;
 import org.evitt.lexer.CharacterStream;
 import org.evitt.lexer.Lexer;
 import org.evitt.logging.Logger;
+import org.evitt.logging.StdoutLogger;
 import org.evitt.parser.Parser;
-import org.evitt.parser.Symbol;
 
 public class Main {
     public static void main(String[] args) {
-        var logger = new Logger();
-
-        logger.error("Some or another");
-
-        var stream = new CharacterStream("(def x 10)");
+        Logger.setLoggerOutput(new StdoutLogger());
+        Logger.setLogLevel(Logger.Level.TRACE);
+        var stream = new CharacterStream("(def x (+ 10 12 32))");
         var lexer = new Lexer(stream);
 
-        var parser = new Parser(lexer);
-        var evaluator = new Interpreter();
+        var root = new Parser(lexer).next();
+        var visitor = new Interpreter();
+        var printer = new PrinterVisitor();
 
-        System.out.println(evaluator.eval(parser.parse()));
-        System.out.println(evaluator.getEnvironment());
-        System.out.println(evaluator.getEnvironment().contains(new Symbol("x")));
+        System.out.println(printer.visit(root));
+        new ExprLogger().visit(root);
+        System.out.println(root.accept(visitor));
     }
 }

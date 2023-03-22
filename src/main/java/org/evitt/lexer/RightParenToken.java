@@ -25,6 +25,11 @@ public final class RightParenToken implements Token {
     }
 
     @Override
+    public int hashCode() {
+        return 37;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         return obj instanceof RightParenToken;
     }

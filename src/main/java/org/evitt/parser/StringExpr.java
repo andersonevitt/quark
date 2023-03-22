@@ -19,7 +19,7 @@ package org.evitt.parser;
 
 import org.jetbrains.annotations.NotNull;
 
-public record StringExpr(String value) implements Expression {
+public record StringExpr(String value) implements Expr {
     public @NotNull String toString() {
         return "\"" + value + "\"";
     }

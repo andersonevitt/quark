@@ -19,35 +19,10 @@ package org.evitt.lexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public final class BooleanToken implements Token {
-    private final boolean value;
-
-    public BooleanToken(boolean value) {
-        this.value = value;
-    }
-
-    @Override
-    public int hashCode() {
-        return (isValue() ? 1 : 0);
-    }
-
-    @Override
-    public boolean equals(@Nullable Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        BooleanToken that = (BooleanToken) o;
-
-        return isValue() == that.isValue();
-    }
-
+public record BooleanToken(boolean value) implements Token {
     @Override
     public @NotNull String toString() {
         return "BOOLEAN(" + value + ")";
-    }
-
-    public boolean isValue() {
-        return value;
     }
 
     @Override

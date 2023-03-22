@@ -14,8 +14,17 @@
  * limitations under the License.
  */
 
-package org.evitt.parser;
+package org.evitt.lexer;
 
-public interface Expression {
-    Object getValue();
+import org.jetbrains.annotations.NotNull;
+
+public record IntToken(int value) implements Token {
+    public @NotNull Object getValue() {
+        return value;
+    }
+
+    @Override
+    public @NotNull String toString() {
+        return "INTEGER(" + value + ")";
+    }
 }

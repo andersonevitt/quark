@@ -24,7 +24,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Parser implements Iterator<Expression> {
+public class Parser implements Iterator<Expr> {
     private final @NotNull PeekableIterator<Token> lexer;
     private final Position position;
 
@@ -39,11 +39,11 @@ public class Parser implements Iterator<Expression> {
     }
 
     @Override
-    public @NotNull Expression next() {
+    public @NotNull Expr next() {
         return parse();
     }
 
-    public @NotNull Expression parse() {
+    public @NotNull Expr parse() {
         if (!lexer.hasNext()) {
             throw new ParserException("No more tokens");
         }
@@ -52,8 +52,12 @@ public class Parser implements Iterator<Expression> {
             return new Symbol((String) lexer.next().getValue());
         }
 
-        if (lexer.peek() instanceof IntegerToken) {
-            return new NumberExpr((int) lexer.next().getValue());
+        if (lexer.peek() instanceof IntToken) {
+            return new IntExpr((int) lexer.next().getValue());
+        }
+
+        if (lexer.peek() instanceof FloatToken) {
+            return new FloatExpr((int) lexer.next().getValue());
         }
 
         if (lexer.peek() instanceof StringToken) {
@@ -65,7 +69,7 @@ public class Parser implements Iterator<Expression> {
         }
 
         if (lexer.peek() instanceof LeftParenToken) {
-            List<Expression> exprs = new LinkedList<>();
+            List<Expr> exprs = new LinkedList<>();
             lexer.next();
 
             while (!(lexer.peek() instanceof RightParenToken)) {
@@ -75,15 +79,12 @@ public class Parser implements Iterator<Expression> {
             lexer.next();
 
             var first = (Symbol) exprs.remove(0);
-            System.out.println("Parsed first: " + first);
-            System.out.println("Rest: " + exprs);
-
             return new Call(first, exprs);
         }
 
 
         if (lexer.peek() instanceof RightParenToken) {
-            throw new ParserException(position, "Unexpected right parenthesis at");
+            throw new ParserException(position, "Unexpected right parenthesis");
         }
 
 

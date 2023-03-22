@@ -19,9 +19,7 @@ package org.evitt.lexer;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import static org.evitt.lexer.Token.*;
 
@@ -34,7 +32,7 @@ public class Lexer implements Iterator<Token> {
         this.position = stream.getPosition();
     }
 
-    public Position getPosition() {
+    public @NotNull Position getPosition() {
         return position;
     }
 
@@ -71,19 +69,20 @@ public class Lexer implements Iterator<Token> {
                     if (escaped) {
                         escaped = false;
                         matched.append(switch (stream.next()) {
-                           case 'r' -> '\r';
-                           case 'n' -> '\n';
-                           case '\\' -> '\\';
-                           case '\"' -> '\"';
-                            default -> matched.append('\\').append(stream.peek());
+                            case 'r' -> '\r';
+                            case 'n' -> '\n';
+                            case '\\' -> '\\';
+                            case '\"' -> '\"';
+                            default ->
+                                    matched.append('\\').append(stream.peek());
                         });
                     } else if (stream.peek() == '\\') {
                         stream.next();
                         escaped = true;
-                    } else if (stream.peek() == '\"'){
+                    } else if (stream.peek() == '\"') {
                         stream.next();
                         return getString(matched.toString());
-                    }else {
+                    } else {
                         matched.append(stream.next());
                     }
                 }
@@ -94,8 +93,8 @@ public class Lexer implements Iterator<Token> {
             case ';' -> {
                 while (stream.peek() != '\n') stream.next();
 
-
-                // TODO: This could potentially cause a stack overflow in really large numbers and is *slightly*
+                // TODO: This could potentially cause a stack overflow in
+                //  really large numbers and is *slightly*
                 //  inefficient
                 return next();
             }

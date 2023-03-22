@@ -34,7 +34,9 @@ public class LexerException extends RuntimeException {
         super(cause);
     }
 
-    public LexerException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public LexerException(String message, Throwable cause,
+                          boolean enableSuppression,
+                          boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

@@ -18,8 +18,8 @@ package org.evitt.lexer;
 
 import org.jetbrains.annotations.NotNull;
 
-public sealed interface Token permits BooleanToken, IntegerToken, LeftParenToken, RightParenToken, StringToken,
-        SymbolToken {
+public sealed interface Token permits BooleanToken, FloatToken, IntToken,
+        LeftParenToken, RightParenToken, StringToken, SymbolToken {
     Token LEFT_PAREN = new LeftParenToken();
     Token RIGHT_PAREN = new RightParenToken();
     Token BOOL_TRUE = new BooleanToken(true);
@@ -49,13 +49,21 @@ public sealed interface Token permits BooleanToken, IntegerToken, LeftParenToken
     static @NotNull Token getSymbolOrNumber(@NotNull String matched) {
         try {
             return getInteger(Integer.parseInt(matched));
-        } catch (NumberFormatException e) {
-            return getSymbol(matched);
+        } catch (NumberFormatException e1) {
+            try {
+                return getFloat(Double.parseDouble(matched));
+            } catch (NumberFormatException e2) {
+                return getSymbol(matched);
+            }
         }
     }
 
     static @NotNull Token getInteger(int value) {
-        return new IntegerToken(value);
+        return new IntToken(value);
+    }
+
+    static @NotNull Token getFloat(double value) {
+        return new FloatToken(value);
     }
 
     static @NotNull Token getSymbol(String name) {

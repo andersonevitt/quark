@@ -18,8 +18,8 @@ package org.evitt.interpreter;
 
 import org.evitt.EvaluationException;
 import org.evitt.parser.BooleanExpr;
-import org.evitt.parser.Expression;
-import org.evitt.parser.NumberExpr;
+import org.evitt.parser.Expr;
+import org.evitt.parser.FloatExpr;
 import org.evitt.parser.Symbol;
 import org.jetbrains.annotations.NotNull;
 
@@ -28,99 +28,106 @@ import java.util.List;
 import static org.evitt.interpreter.BuiltinUtils.*;
 
 public class CoreLibrary {
-    static @NotNull Expression add(Environment env, @NotNull List<Expression> args) {
-        if (args.size() == 0) {
-            throw new EvaluationException("Cannot accept zero arguments");
-        } else if (args.size() == 1) {
-            return new NumberExpr(+ (double) args.get(0).getValue());
+    static @NotNull Expr add(Environment env,
+                             @NotNull List<Expr> args) {
+        require(args.isEmpty(), "Cannot accept zero arguments");
+
+        if (args.size() == 1) {
+            return new FloatExpr(+(double) args.get(0).getValue());
         }
 
         double start = 0;
 
-        for (Expression arg : args) {
-            if (!(arg instanceof NumberExpr)) {
+        for (Expr arg : args) {
+            if (!(arg instanceof FloatExpr)) {
                 throw new EvaluationException("Argument must be a number");
             }
 
             start += (double) arg.getValue();
         }
 
-        return new NumberExpr(start);
+        return new FloatExpr(start);
     }
 
-    static @NotNull Expression subtract(Environment env, @NotNull List<Expression> args) {
+    static @NotNull Expr subtract(Environment env,
+                                  @NotNull List<Expr> args) {
         if (args.size() == 0) {
             throw new EvaluationException("Cannot accept zero arguments");
         } else if (args.size() == 1) {
-            return new NumberExpr(-(double) args.get(0).getValue());
+            return new FloatExpr(-(double) args.get(0).getValue());
         }
 
         double start = 0;
 
-        for (Expression arg : args) {
-            if (!(arg instanceof NumberExpr)) {
+        for (Expr arg : args) {
+            if (!(arg instanceof FloatExpr)) {
                 throw new EvaluationException("Argument must be a number");
             }
 
             start -= (double) arg.getValue();
         }
 
-        return new NumberExpr(start);
+        return new FloatExpr(start);
     }
 
-    static @NotNull Expression multiply(Environment env, @NotNull List<Expression> args) {
-        if (args.size() == 0 || args.size() == 1) {
+    static @NotNull Expr multiply(Environment env,
+                                  @NotNull List<Expr> args) {
+        if (args.isEmpty() || args.size() == 1) {
             throw new EvaluationException("Must have more than 1 argument");
         }
 
         double start = (double) args.remove(0).getValue();
 
-        for (Expression arg : args) {
-            if (!(arg instanceof NumberExpr)) {
+        for (Expr arg : args) {
+            if (!(arg instanceof FloatExpr)) {
                 throw new EvaluationException("Argument must be a number");
             }
 
             start *= (double) arg.getValue();
         }
 
-        return new NumberExpr(start);
+        return new FloatExpr(start);
     }
 
-    static @NotNull Expression power(Environment env, @NotNull List<Expression> args) {
+    static @NotNull Expr power(Environment env,
+                               @NotNull List<Expr> args) {
         requireArity(args, 2);
 
         var base = args.get(0).getValue();
         var power = args.get(1).getValue();
 
-        return new NumberExpr(Math.pow((double) base, (double) power));
+        return new FloatExpr(Math.pow((double) base, (double) power));
     }
 
-    static @NotNull Expression divide(Environment env, @NotNull List<Expression> args) {
-        if (args.size() == 0 || args.size() == 1) {
+    static @NotNull Expr divide(Environment env,
+                                @NotNull List<Expr> args) {
+        if (args.isEmpty() || args.size() == 1) {
             throw new EvaluationException("Must have more than 1 argument");
         }
 
         double start = (double) args.remove(0).getValue();
 
-        for (Expression arg : args) {
-            if (!(arg instanceof NumberExpr)) {
+        for (Expr arg : args) {
+            if (!(arg instanceof FloatExpr)) {
                 throw new EvaluationException("Argument must be a number");
             }
 
             start /= (double) arg.getValue();
         }
 
-        return new NumberExpr(start);
+        return new FloatExpr(start);
     }
 
-    static @NotNull Expression not(Environment env, @NotNull List<Expression> args) {
+    static @NotNull Expr not(Environment env,
+                             @NotNull List<Expr> args) {
         requireArity(args, 1);
         requireArgType(args, 0, BooleanExpr.class);
 
         return new BooleanExpr(!(boolean) args.get(0).getValue());
     }
 
-    static @NotNull Expression and(Environment env, @NotNull List<Expression> args) {
+    static @NotNull Expr and(Environment env,
+                             @NotNull List<Expr> args) {
         requireArityAtLeast(args, 2);
         requireArgType(args, 0, BooleanExpr.class);
         requireArgType(args, 1, BooleanExpr.class);
@@ -128,7 +135,8 @@ public class CoreLibrary {
         return new BooleanExpr((boolean) args.get(0).getValue() && (boolean) args.get(1).getValue());
     }
 
-    static @NotNull Expression or(Environment env, @NotNull List<Expression> args) {
+    static @NotNull Expr or(Environment env,
+                            @NotNull List<Expr> args) {
         requireArityAtLeast(args, 2);
         requireArgType(args, 0, BooleanExpr.class);
         requireArgType(args, 1, BooleanExpr.class);
@@ -136,8 +144,8 @@ public class CoreLibrary {
         return new BooleanExpr((boolean) args.get(0).getValue() || (boolean) args.get(1).getValue());
     }
 
-    static Expression define(@NotNull Environment env, @NotNull List<Expression> args) {
-        System.out.println(args);
+    static Expr define(@NotNull Environment env,
+                       @NotNull List<Expr> args) {
         requireArity(args, 2);
         requireArgType(args, 0, Symbol.class);
 
