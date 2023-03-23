@@ -16,8 +16,8 @@
 
 package org.quark.parser;
 
-import org.quark.lexer.Position;
 import org.jetbrains.annotations.NotNull;
+import org.quark.lexer.Position;
 
 public class ParserException extends RuntimeException {
     public ParserException() {

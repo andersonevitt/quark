@@ -16,8 +16,8 @@
 
 package org.quark.eval;
 
-import org.quark.EvaluationException;
 import org.jetbrains.annotations.NotNull;
+import org.quark.EvaluationException;
 
 import java.lang.reflect.InvocationTargetException;
 

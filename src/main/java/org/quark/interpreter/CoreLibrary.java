@@ -16,12 +16,12 @@
 
 package org.quark.interpreter;
 
+import org.jetbrains.annotations.NotNull;
 import org.quark.EvaluationException;
 import org.quark.eval.QBoolean;
 import org.quark.eval.QExpr;
 import org.quark.eval.QFloat;
 import org.quark.eval.QSymbol;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

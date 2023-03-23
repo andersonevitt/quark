@@ -16,12 +16,12 @@
 
 package org.quark.parser;
 
+import org.jetbrains.annotations.NotNull;
 import org.quark.eval.*;
 import org.quark.lexer.Lexer;
 import org.quark.lexer.Position;
 import org.quark.lexer.Token;
 import org.quark.util.PeekableIterator;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Iterator;
 import java.util.LinkedList;

@@ -18,8 +18,11 @@ package org.quark.eval;
 
 public non-sealed interface QNumber extends QExpr {
     QNumber plus(QNumber other);
+
     QNumber minus(QNumber other);
+
     QNumber multiply(QNumber other);
+
     QNumber divide(QNumber other);
 
     default int intValue() {

@@ -16,8 +16,8 @@
 
 package org.quark.interpreter;
 
-import org.quark.eval.*;
 import org.jetbrains.annotations.NotNull;
+import org.quark.eval.*;
 
 public class ExprPrinter implements Visitor<String> {
 

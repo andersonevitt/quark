@@ -18,7 +18,8 @@ package org.quark.eval;
 
 import org.jetbrains.annotations.NotNull;
 
-public sealed interface QExpr permits QBoolean, QBuiltin, QCall, QFloat, QInteger, QLambda, QNumber, QSequence, QString, QSymbol {
+public sealed interface QExpr permits QBoolean, QBuiltin, QCall, QFloat, QInteger, QLambda, QNumber, QSequence,
+        QString, QSymbol {
     Object getValue();
 
     default <T> T accept(@NotNull Visitor<T> v) {

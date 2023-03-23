@@ -16,11 +16,11 @@
 
 package org.quark.interpreter;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.quark.eval.QExpr;
 import org.quark.eval.QSymbol;
 import org.quark.interpreter.core.Add;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;

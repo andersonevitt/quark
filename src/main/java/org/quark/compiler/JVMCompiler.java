@@ -19,9 +19,9 @@ package org.quark.compiler;
 import com.squareup.javapoet.JavaFile;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec;
+import org.jetbrains.annotations.NotNull;
 import org.quark.EvaluationException;
 import org.quark.eval.*;
-import org.jetbrains.annotations.NotNull;
 
 import javax.lang.model.element.Modifier;
 import java.io.IOException;

@@ -16,10 +16,10 @@
 
 package org.quark.interpreter;
 
-import org.quark.eval.*;
-import org.quark.logging.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.quark.eval.*;
+import org.quark.logging.Logger;
 
 public class ExprLogger implements Visitor<Void> {
     @Override

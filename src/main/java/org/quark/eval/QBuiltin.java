@@ -16,8 +16,8 @@
 
 package org.quark.eval;
 
-import org.quark.interpreter.Interpreter;
 import org.jetbrains.annotations.NotNull;
+import org.quark.interpreter.Interpreter;
 
 import java.util.List;
 

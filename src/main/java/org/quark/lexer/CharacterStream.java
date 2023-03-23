@@ -16,8 +16,8 @@
 
 package org.quark.lexer;
 
-import org.quark.util.PeekableIterator;
 import org.jetbrains.annotations.NotNull;
+import org.quark.util.PeekableIterator;
 
 import java.io.*;
 import java.nio.file.Path;

@@ -16,8 +16,8 @@
 
 package org.quark;
 
-import org.quark.lexer.Position;
 import org.jetbrains.annotations.NotNull;
+import org.quark.lexer.Position;
 
 public class EvaluationException extends RuntimeException {
     public EvaluationException(@NotNull Position position, String message) {

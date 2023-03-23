@@ -16,9 +16,9 @@
 
 package org.quark.interpreter;
 
+import org.jetbrains.annotations.NotNull;
 import org.quark.EvaluationException;
 import org.quark.eval.QExpr;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 

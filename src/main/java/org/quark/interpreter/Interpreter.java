@@ -16,10 +16,10 @@
 
 package org.quark.interpreter;
 
-import org.quark.EvaluationException;
-import org.quark.eval.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.quark.EvaluationException;
+import org.quark.eval.*;
 
 import java.util.List;
 

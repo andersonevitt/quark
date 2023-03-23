@@ -31,9 +31,9 @@ public sealed interface QSequence extends QExpr permits QList, QVector {
      */
     @Nullable QExpr nth(int n);
 
-    @NotNull QInteger length();
-
     default @NotNull QBoolean isEmpty() {
         return new QBoolean(length().equals(new QInteger(0)));
     }
+
+    @NotNull QInteger length();
 }
