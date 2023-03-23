@@ -20,7 +20,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.evitt</groupId>
+    <groupId>org.quark</groupId>
     <artifactId>quark</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -64,6 +64,7 @@
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.24.2</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
@@ -80,7 +81,7 @@
         <dependency>
             <groupId>org.jline</groupId>
             <artifactId>jline</artifactId>
-            <version>3.22.0</version>
+            <version>3.23.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -92,6 +93,11 @@
             <groupId>org.ow2.asm</groupId>
             <artifactId>asm-util</artifactId>
             <version>9.4</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup</groupId>
+            <artifactId>javapoet</artifactId>
+            <version>1.13.0</version>
         </dependency>
 
     </dependencies>
@@ -120,7 +126,7 @@
                 <configuration>
                     <transformers>
                         <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <mainClass>org.evitt.Main</mainClass>
+                            <mainClass>org.quark.Main</mainClass>
                         </transformer>
                     </transformers>
                     <minimizeJar>true</minimizeJar>
